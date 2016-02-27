@@ -1,0 +1,12 @@
+
+# except for .gitignore
+!.gitignore
+
+# Ignore working directory #
+/target/
+.classpath
+.project
+.settings/
+*.iml
+.idea/
+target/

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/task
+        http://www.springframework.org/schema/task/spring-task-3.0.xsd">
+
+
+	<bean id="cachePool" class="cn.uncode.session.data.memcached.MemcachedPool">
+		<property name="hosts">
+			<list>
+				<value>127.0.0.1:11211</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- 配置缓存 -->
+	<bean id="memcachedSessionCache" class="cn.uncode.session.data.memcached.MemcachedSessionCache" />
+
+	<!-- 配置会话缓存管理器 -->
+	<bean id="sessionCacheManager" class="cn.uncode.session.data.SessionCacheManager">
+		<property name="sessionCache" ref="memcachedSessionCache" />
+		<!-- 或者使用以下配置，二选一 -->
+		<!--
+        <property name="beanName" value="memcachedSessionCache" />
+        -->
+	</bean>
+</beans>
